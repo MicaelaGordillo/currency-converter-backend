@@ -1,0 +1,26 @@
+#Antes: docker run -e URL="jdbc:postgresql://172.19.194.174:5432/software" -p 8008:8008 currency-converter-kotlin-docker:2.0.0
+#Definir los servicios que va a tener nuestro docker
+version: "2.4"
+
+
+services:
+  postgres:
+    image: postgres:15
+    mem_limit: 1024m
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: mysecretpassword
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+      - /Users/micae/OneDrive/Escritorio/Arquitectura de Software/Docker/data
+  currency-converter:
+    image: demo:2.0.0
+    restart: always
+    mem_limit: 512m
+    ports:
+      - "8008:8008"
+    environment:
+      URL: "${POSTGRES_URL}"
+    depends_on:
+      - postgres
