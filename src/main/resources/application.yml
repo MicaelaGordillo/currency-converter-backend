@@ -1,11 +1,19 @@
 
 api:
-  key: CAMMIAR
+  key: "w0QJ1JH5U0UH7ZsTAMPvt4uKc76kPsvz"
   url: "https://api.apilayer.com/exchangerates_data/convert"
 
 server:
   port: 8008
 
 spring:
+  datasource:
+    type: org.postgresql.jdbc2.optional.SimpleDataSource
+    username: "postgres" #${USERNAME:postgres}
+    password: "mysecretpassword" #${PASSWORD:mysecretpassword}
+    url: "jdbc:postgresql://localhost:5432/software" #${URL:jdbc:postgresql://localhost:5432/software}
+  jpa:
+    hibernate:
+      ddl-auto: update
   application:
     name: currency-converter
