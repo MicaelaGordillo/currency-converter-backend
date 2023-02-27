@@ -9,9 +9,9 @@ server:
 spring:
   datasource:
     type: org.postgresql.jdbc2.optional.SimpleDataSource
-    username: postgres #${USERNAME:postgres}
-    password: mysecretpassword #${PASSWORD:mysecretpassword}
-    url: jdbc:postgresql://localhost:5432/software #${URL:jdbc:postgresql://localhost:5432/software}
+    username: ${USERNAME:postgres}
+    password: ${PASSWORD:mysecretpassword}
+    url: ${URL:jdbc:postgresql://localhost:5432/software}
   jpa:
     hibernate:
       ddl-auto: update
