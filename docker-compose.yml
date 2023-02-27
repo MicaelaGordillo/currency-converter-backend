@@ -13,7 +13,7 @@ services:
       POSTGRES_PASSWORD: mysecretpassword
     volumes:
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
-      - /Users/micae/OneDrive/Escritorio/Arquitectura de Software/Docker/data
+      - /Users/micae/OneDrive/Escritorio/aquitectura/docker/data
   currency-converter:
     image: demo:2.0.0
     restart: always
