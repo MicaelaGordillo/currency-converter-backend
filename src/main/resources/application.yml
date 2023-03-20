@@ -1,7 +1,7 @@
 
 api:
-  key: "w0QJ1JH5U0UH7ZsTAMPvt4uKc76kPsvz"
-  url: "https://api.apilayer.com/exchangerates_data/convert"
+  key: ${API_KEY:w0QJ1JH5U0UH7ZsTAMPvt4uKc76kPsvz}
+  url: ${API_URL:https://api.apilayer.com/exchangerates_data/convert}
 
 server:
   port: 8008
@@ -9,11 +9,13 @@ server:
 spring:
   datasource:
     type: org.postgresql.jdbc2.optional.SimpleDataSource
-    username: ${USERNAME:postgres}
-    password: ${PASSWORD:mysecretpassword}
-    url: ${URL:jdbc:postgresql://localhost:5432/software}
+    username: ${DB_USERNAME:postgres}
+    password: ${DB_PASSWORD:mysecretpassword}
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/software}
+
   jpa:
     hibernate:
       ddl-auto: update
+
   application:
     name: currency-converter

@@ -1,8 +1,32 @@
 ##Using the external service - correct way
-GET http://localhost:8008/api/currency/exchange?to=eur&from=usd&amount=1000
+GET http://localhost:8008/api/currency/exchange?to=BOB&from=USD&amount=1000
 
 ###
 ##Using the external service - wrong way
 GET http://localhost:8008/api/currency/exchange?to=bob&from=usd&amount=0
 ###
 GET http://localhost:8008/api/currency/exchange?to=bob&from=usd&amount=-12
+
+###
+##Show list of registers
+GET http://localhost:8008/api/currency/list
+
+###
+##Show list of registers CURRENCY_FROM = USD
+GET http://localhost:8008/api/currency/list/from/BOB
+
+###
+##Show list of registers CURRENCY_FROM = USD and CURRENCY_TO = EUR
+GET http://localhost:8008/api/currency/list/to/USD
+
+###
+##Show list of registers ascendet by amount
+GET http://localhost:8008/api/currency/list/asc
+
+###
+##Show list of registers descendet by amount
+GET http://localhost:8008/api/currency/list/desc
+
+###
+##Show the registers in a range
+GET http://localhost:8008/api/currency/list/range/1/10
