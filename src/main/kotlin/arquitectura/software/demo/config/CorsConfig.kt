@@ -30,12 +30,10 @@ class CorsConfig {
             "Access-Control-Allow-Credentials"
         );
         corsConfiguration.allowedMethods = listOf(
-            "GET", "POST", "PUT", "DELETE",
-            "OPTIONS"
+            "GET", "POST", "PUT", "DELETE", "OPTIONS"
         )
         val urlBasedCorsConfigurationSource = UrlBasedCorsConfigurationSource();
-        urlBasedCorsConfigurationSource
-            .registerCorsConfiguration("/**", corsConfiguration);
+        urlBasedCorsConfigurationSource.registerCorsConfiguration("/**", corsConfiguration);
         return CorsFilter(urlBasedCorsConfigurationSource)
     }
 

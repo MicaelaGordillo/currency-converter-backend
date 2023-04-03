@@ -1,3 +1,4 @@
+#Con JAR
 #FROM eclipse-temurin:11
 #COPY target/*.jar app.jar
 
@@ -10,6 +11,7 @@
 
 #ENTRYPOINT ["java","-jar","/app.jar"]
 
+#Con clases
 FROM --platform=linux/x86_64 eclipse-temurin:11.0.18_10-jdk-alpine as build
 WORKDIR /workspace/app
 

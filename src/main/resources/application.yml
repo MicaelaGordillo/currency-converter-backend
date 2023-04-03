@@ -1,11 +1,12 @@
+# Configuramos el puerto de la aplicación
+server:
+  port: 8008
 
 api:
   key: ${API_KEY:w0QJ1JH5U0UH7ZsTAMPvt4uKc76kPsvz}
   url: ${API_URL:https://api.apilayer.com/exchangerates_data/convert}
 
-server:
-  port: 8008
-
+# Configuramos la base de datos
 spring:
   datasource:
     type: org.postgresql.jdbc2.optional.SimpleDataSource
@@ -19,3 +20,38 @@ spring:
 
   application:
     name: currency-converter
+
+#eureka:
+#  client:
+#    registerWithEureka: true
+#    serviceUrl:
+#      defaultZone: http://localhost:8761/eureka/
+
+# Configuramos springboot con keycloak
+keycloak:
+  auth-server-url: http://192.168.1.205:8080
+  autodetect-bearer-only: true
+  credentials:
+    secret: sJfdWcUkRXjnGHvkkRZ6q5ejibUEcPY7
+  realm: software
+  resource: backend
+  ssl-required: none
+  use-resource-role-mappings: false
+  security-constraints:
+    - authRoles:
+        - ADMIN
+      securityCollections:
+        - name: SERVICIOS DEL ADMINISTRADOR
+          omitted-methods:
+            - OPTIONS
+          patterns:
+            - /api/currency/list
+            - /api/currency/list/*
+    - authRoles:
+        - USER
+      securityCollections:
+        - name: SERVICIOS DEL USUARIO
+          omitted-methods:
+            - OPTIONS
+          patterns:
+            - /api/currency/exchange

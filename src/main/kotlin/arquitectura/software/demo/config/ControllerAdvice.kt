@@ -1,6 +1,5 @@
 package arquitectura.software.demo.config
 
-
 import arquitectura.software.demo.exception.ServiceException
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -9,7 +8,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler
 import java.net.SocketTimeoutException
 import java.time.LocalDateTime
-
 
 @ControllerAdvice
 class ControllerAdvice: ResponseEntityExceptionHandler() {

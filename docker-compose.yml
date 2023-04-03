@@ -1,8 +1,9 @@
-#Definir los servicios que va a tener nuestro docker
+# Definir los servicios que va a tener nuestro docker
+# Se crea el contenedor
 version: "2.4"
 
-
 services:
+  # Definir el servicio de postgres
   postgres:
     image: postgres
     mem_limit: 1024m
@@ -12,12 +13,13 @@ services:
       POSTGRES_PASSWORD: mysecretpassword
     volumes:
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
-      - /Users/micae/OneDrive/Escritorio/Arquitectura_de_Software/Docker/var/lib/postgresql/data
+      - C:/Users/micae/Arquitectura_de_Software:/var/lib/postgres/data
     networks:
       - micaela-network
+  # Definir el servicio de currency-converter
   currency-converter:
     image: demo:3.0.0
-    restart: always
+    restart: always # Reinicio hasta que postgres esté listo
     ports:
       - "8008:8008"
     environment:
@@ -30,6 +32,7 @@ services:
       - postgres
     networks:
       - micaela-network
+  # Definir el servicio de angular
   angular:
     image: angular-software:4.0.0
     ports:
@@ -38,12 +41,13 @@ services:
       - ./nginx.conf:/etc/nginx/nginx.conf
     networks:
       - micaela-network
+
 networks:
-    micaela-network:
-        driver: bridge
-        ipam:
-          driver: default
-          config:
-              - subnet: 172.9.0.0/16
-                gateway: 172.9.0.1
-    ports:
+  micaela-network:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.9.0.0/16
+          gateway: 172.9.0.1
+  ports:

@@ -1,32 +1,26 @@
-##Using the external service - correct way
-GET http://localhost:8008/api/currency/exchange?to=BOB&from=USD&amount=1000
+### Usando el servicio externo - forma correcta
+GET http://localhost:8008/api/currency/exchange?to=BOB&from=USD&amount=800
 
-###
-##Using the external service - wrong way
+### Usando el servicio externo - forma incorrecta: monto cero
 GET http://localhost:8008/api/currency/exchange?to=bob&from=usd&amount=0
-###
+
+### Usando el servicio externo - forma incorrecta: monto negativo
 GET http://localhost:8008/api/currency/exchange?to=bob&from=usd&amount=-12
 
-###
-##Show list of registers
+### Mostrar la lista de consultas realizadas de cambio de moneda
 GET http://localhost:8008/api/currency/list
 
-###
-##Show list of registers CURRENCY_FROM = USD
+### Mostrar la lista de consultas realizadas de cambio de moneda en base al CURRENCY_FROM = BOB
 GET http://localhost:8008/api/currency/list/from/BOB
 
-###
-##Show list of registers CURRENCY_FROM = USD and CURRENCY_TO = EUR
+### Mostrar la lista de consultas realizadas de cambio de moneda en base al CURRENCY_TO = USD
 GET http://localhost:8008/api/currency/list/to/USD
 
-###
-##Show list of registers ascendet by amount
+### Mostrar la lista de consultas realizadas de cambio de moneda ordenado de forma ascendente por el monto
 GET http://localhost:8008/api/currency/list/asc
 
-###
-##Show list of registers descendet by amount
+### Mostrar la lista de consultas realizadas de cambio de moneda ordenado de forma descendente por el monto
 GET http://localhost:8008/api/currency/list/desc
 
-###
-##Show the registers in a range
+### Mostrar la lista de las 10 primeras consultas realizadas de cambio de moneda
 GET http://localhost:8008/api/currency/list/range/1/10

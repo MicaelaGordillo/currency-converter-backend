@@ -33,7 +33,7 @@ build/
 .vscode/
 
 ### .env ###
-.env
+### .env ###
 
 ### Ignore logs folder ###
-logs/
+### logs/ ###

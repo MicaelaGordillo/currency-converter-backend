@@ -28,14 +28,17 @@ class CurrencyBl @Autowired constructor(private val currencyRepository: Currency
         val LOGGER: Logger = LoggerFactory.getLogger(CurrencyBl::class.java)
     }
 
+    //Se obtienen los valores de las variables de entorno
+    //Declaramos la url de la api
     @Value("\${api.url}")
     lateinit var apiUrl: String
-
+    //Declaramos la api key
     @Value("\${api.key}")
     lateinit var apiKey: String
 
+    //Método para convertir divisas
     fun exchangeRate(to: String, from: String, amount: BigDecimal): ResponseServiceDto {
-        LOGGER.error("Iniciando logica para convertir divisas")
+        LOGGER.error("Iniciando lógica para convertir divisas")
         if (amount < BigDecimal.ZERO) {
             LOGGER.error("El monto no puede ser negativo")
             throw IllegalArgumentException("El monto no puede ser negativo")
@@ -52,6 +55,7 @@ class CurrencyBl @Autowired constructor(private val currencyRepository: Currency
         return responseServiceDto
     }
 
+    //Método para invocar el servicio de conversión de divisas
     fun invokeApi(endpoint: String): Response {
         LOGGER.info("Invocando servicio de conversión de monedas")
         val client = OkHttpClient()
@@ -67,6 +71,7 @@ class CurrencyBl @Autowired constructor(private val currencyRepository: Currency
         }
     }
 
+    //Método para parsear la respuesta del servicio de conversión de divisas
     fun parseResponse(response: Response): ResponseServiceDto {
         LOGGER.info("Parseando respuesta del servicio de conversión de monedas")
         val body = response.body().string()
@@ -98,76 +103,46 @@ class CurrencyBl @Autowired constructor(private val currencyRepository: Currency
     //Lista de registros por moneda origen
     fun listByFrom(currencyFrom: String): List<CurrencyDto> {
         LOGGER.info("Iniciando peticion para listar registros por moneda origen")
-        val result = currencyRepository.findAll()
-        val list = result.map { currency ->
-            CurrencyDto(
-                currency.id,
-                currency.currencyFrom,
-                currency.currencyTo,
-                currency.amount,
-                currency.result,
-                currency.date
-            )
+        val list = list()
+        if (list != null) {
+            return list.filter { currency -> currency.currencyFrom == currencyFrom }
         }
-        return list.filter { currency -> currency.currencyFrom == currencyFrom }
+        return emptyList()
     }
 
     //Lista de registros por moneda destino
     fun listByTo(currencyTo: String): List<CurrencyDto> {
         LOGGER.info("Iniciando peticion para listar registros por moneda destino")
-        val result = currencyRepository.findAll()
-        val list = result.map { currency ->
-            CurrencyDto(
-                currency.id,
-                currency.currencyFrom,
-                currency.currencyTo,
-                currency.amount,
-                currency.result,
-                currency.date
-            )
+        val list = list()
+        if (list != null) {
+            return list.filter { currency -> currency.currencyTo == currencyTo }
         }
-        return list.filter { currency -> currency.currencyTo == currencyTo }
+        return emptyList()
     }
 
     //Lista de registros ordenada de forma ascendente por monto
     fun listByAmountAsc(): List<CurrencyDto> {
         LOGGER.info("Iniciando peticion para listar registros ordenados por monto de forma ascendente")
-        val result = currencyRepository.findAll()
-        val list = result.map { currency ->
-            CurrencyDto(
-                currency.id,
-                currency.currencyFrom,
-                currency.currencyTo,
-                currency.amount,
-                currency.result,
-                currency.date
-            )
+        val list = list()
+        if (list != null) {
+            return list.sortedBy { currency -> currency.amount }
         }
-        return list.sortedBy { currency -> currency.amount }
+        return emptyList()
     }
 
     //Lista de registros ordenada de forma descendente por monto
     fun listByAmountDesc(): List<CurrencyDto> {
         LOGGER.info("Iniciando peticion para listar registros ordenados por monto de forma descendente")
-        val result = currencyRepository.findAll()
-        val list = result.map { currency ->
-            CurrencyDto(
-                currency.id,
-                currency.currencyFrom,
-                currency.currencyTo,
-                currency.amount,
-                currency.result,
-                currency.date
-            )
+        val list = list()
+        if (list != null) {
+            return list.sortedByDescending { currency -> currency.amount }
         }
-        return list.sortedByDescending { currency -> currency.amount }
+        return emptyList()
     }
 
     //Lista de registros en un rango - paginacion
     fun listByRange(from: Int, to: Int): List<CurrencyDto> {
-        println("De donde: "+from)
-        println("Hasta donde: "+to)
-        LOGGER.info("Iniciando peticion para listar registros en un rango")
+        LOGGER.info("Iniciando petición para listar registros en un rango de $from a $to")
         val result = currencyRepository.findAll()
         var list = result.map { currency ->
             CurrencyDto(

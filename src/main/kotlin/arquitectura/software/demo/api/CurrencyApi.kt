@@ -9,9 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
 import java.math.BigDecimal
 
-
-@RequestMapping("/api/currency")
 @RestController
+@RequestMapping("/api/currency")
 class CurrencyApi @Autowired constructor(private val currencyBl: CurrencyBl) {
 
     companion object {
@@ -73,6 +72,18 @@ class CurrencyApi @Autowired constructor(private val currencyBl: CurrencyBl) {
         LOGGER.info("Iniciando peticion para listar registros en un rango")
         val result = currencyBl.listByRange(from, to)
         return result
+    }
+
+    @GetMapping("/user")
+    fun user(): String {
+        LOGGER.info("Iniciando servicio user")
+        return "ROLE_USER"
+    }
+
+    @GetMapping("/admin")
+    fun admin(): String {
+        LOGGER.info("Iniciando servicio admin")
+        return "ROLE_ADMIN"
     }
 
 }

@@ -1,0 +1,8 @@
+### Obtener la lista de vuelos desde Madrid a Barcelona para el 2023-04-03
+GET http://localhost:8008/api/vuelo/list/Barcelona/Madrid/2023-04-03
+
+### Obtener la llista de hoteles en Madrid
+GET http://localhost:8008/api/hotel/list/Madrid
+
+### Obtener toda la informacion desde la facade
+GET http://localhost:8008/api/facade/list/Barcelona/Madrid/2023-04-03/2023-04-14
