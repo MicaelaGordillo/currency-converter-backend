@@ -29,7 +29,7 @@ spring:
 
 # Configuramos springboot con keycloak
 keycloak:
-  auth-server-url: http://192.168.1.205:8080
+  auth-server-url: http://172.20.10.5:8080
   autodetect-bearer-only: true
   credentials:
     secret: sJfdWcUkRXjnGHvkkRZ6q5ejibUEcPY7

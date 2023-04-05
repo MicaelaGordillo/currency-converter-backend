@@ -21,7 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import java.util.*
 
 @Service
-class CurrencyBl @Autowired constructor(private val currencyRepository: CurrencyRepository){
+class CurrencyBl @Autowired constructor(private val currencyRepository: CurrencyRepository) {
 
     companion object {
         val objectMapper = jacksonObjectMapper()

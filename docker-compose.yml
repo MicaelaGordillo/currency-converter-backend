@@ -30,6 +30,8 @@ services:
       API_URL: ${API_URL}
     depends_on:
       - postgres
+    volumes:
+      - C:/Users/micae/OneDrive/Escritorio/Arquitectura_de_Software/Docker/CurrencyConverter-Kotlin-Docker/logs:/var/log/currency-converter
     networks:
       - micaela-network
   # Definir el servicio de angular
