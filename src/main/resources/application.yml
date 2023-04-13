@@ -21,15 +21,16 @@ spring:
   application:
     name: currency-converter
 
-#eureka:
-#  client:
-#    registerWithEureka: true
-#    serviceUrl:
-#      defaultZone: http://localhost:8761/eureka/
+eureka:
+  client:
+    registerWithEureka: true
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
 
 # Configuramos springboot con keycloak
 keycloak:
-  auth-server-url: http://172.20.10.5:8080
+  # auth-server-url: http://172.20.10.5:8080
+  auth-server-url: http://localhost:8080
   autodetect-bearer-only: true
   credentials:
     secret: sJfdWcUkRXjnGHvkkRZ6q5ejibUEcPY7
@@ -37,21 +38,21 @@ keycloak:
   resource: backend
   ssl-required: none
   use-resource-role-mappings: false
-  security-constraints:
-    - authRoles:
-        - ADMIN
-      securityCollections:
-        - name: SERVICIOS DEL ADMINISTRADOR
-          omitted-methods:
-            - OPTIONS
-          patterns:
-            - /api/currency/list
-            - /api/currency/list/*
-    - authRoles:
-        - USER
-      securityCollections:
-        - name: SERVICIOS DEL USUARIO
-          omitted-methods:
-            - OPTIONS
-          patterns:
-            - /api/currency/exchange
+#  security-constraints:
+#    - authRoles:
+#        - ADMIN
+#      securityCollections:
+#        - name: SERVICIOS DEL ADMINISTRADOR
+#          omitted-methods:
+#            - OPTIONS
+#          patterns:
+#            - /api/currency/list
+#            - /api/currency/list/*
+#    - authRoles:
+#        - USER
+#      securityCollections:
+#        - name: SERVICIOS DEL USUARIO
+#          omitted-methods:
+#            - OPTIONS
+#          patterns:
+#            - /api/currency/exchange
